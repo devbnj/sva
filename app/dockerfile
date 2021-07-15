@@ -1,0 +1,19 @@
+# FROM ubuntu:18.04
+FROM python:3.6-slim-buster
+
+WORKDIR /svan
+COPY . .
+ENV FLASK_APP app.py
+ENV FLASK_RUN_HOST 0.0.0.0
+
+RUN apt-get update && apt-get install make gcc -y
+RUN make install
+ENV LC_ALL C.UTF-8 
+ENV LANG C.UTF-8
+COPY requirements.txt requirements.txt
+RUN pip3 install --no-cache-dir -r requirements.txt
+EXPOSE 5000
+
+# RUN python3 -m flask run
+# CMD ["flask", "run"]
+CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]

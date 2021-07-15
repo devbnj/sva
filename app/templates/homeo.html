@@ -1,0 +1,49 @@
+<!-- templates/profile.html -->
+
+{% extends "base2.html" %}
+
+{% block content %}
+<div cass="w3-container w3-row">
+<h1 class="w3-center">Homeopathy</h1>
+</div>
+
+<br />
+
+<div class="w3-container w3-card-2 w3-row">
+{% for post in hpost %}
+<h2 class="w3-large"><span class="w3-orange w3-round-xxlarge">&nbsp; {{ post.name }}&nbsp; </span> {% if 'common_names' in post %} , Common Names: {{ post['common_names'] }} {% endif %}</h2>
+{% if 'details' in post %} <p><span class="w3-text-blue"><b>Details:</b></span> {{ post['details'] }}</p>  {% endif %}
+{% if 'dosage' in post %} <p><span class="w3-text-blue"><b>Dosage:</b></span> {{ post['dosage'] }}</p>  {% endif %}
+{% if 'Mind' in post['symptoms'] %} <p><b>* Mind:</b> {{ post['symptoms']['Mind'] }}</p>  {% endif %}
+{% if 'Head' in post['symptoms'] %} <p><b>* Head:</b> {{ post['symptoms']['Head'] }}</p>  {% endif %}
+{% if 'Eyes' in post['symptoms'] %} <p><b>* Eyes:</b> {{ post['symptoms']['Eyes'] }}</p>  {% endif %}
+{% if 'Face' in post['symptoms'] %} <p><b>* Face:</b> {{ post['symptoms']['Face'] }}</p>  {% endif %}
+{% if 'Nose' in post['symptoms'] %} <p><b>* Nose:</b> {{ post['symptoms']['Nose'] }}</p>  {% endif %}{% if 'Mouth' in post['symptoms'] %} <p><b>* Mouth:</b> {{ post['symptoms']['Mouth'] }}</p>  {% endif %}
+{% if 'Ears' in post['symptoms'] %} <p><b>* Ears:</b> {{ post['symptoms']['Ears'] }}</p>  {% endif %}
+{% if 'Respiratory' in post['symptoms'] %} <p><b>* Respiratory:</b> {{ post['symptoms']['Respiratory'] }}</p>  {% endif %}
+
+{% if 'Throat' in post['symptoms'] %} <p><b>* Throat:</b> {{ post['symptoms']['Throat'] }}</p>  {% endif %}
+{% if 'Chest' in post['symptoms'] %} <p><b>* Chest:</b> {{ post['symptoms']['Chest'] }}</p>  {% endif %}
+{% if 'Stomach' in post['symptoms'] %} <p><b>* Stomach:</b> {{ post['symptoms']['Stomach'] }}</p>  {% endif %}
+{% if 'Abdomen' in post['symptoms'] %} <p><b>* Abdomen:</b> {{ post['symptoms']['Abdomen'] }}</p>  {% endif %}
+{% if 'Gastric' in post['symptoms'] %} <p><b>* Gastric:</b> {{ post['symptoms']['Gastric'] }}</p>  {% endif %}
+{% if 'Heart' in post['symptoms'] %} <p><b>* Heart:</b> {{ post['symptoms']['Heart'] }}</p>  {% endif %}
+{% if 'Male' in post['symptoms'] %} <p><b>* Male:</b> {{ post['symptoms']['Male'] }}</p>  {% endif %}
+{% if 'Female' in post['symptoms'] %} <p><b>* Female:</b> {{ post['symptoms']['Female'] }}</p>  {% endif %}
+{% if 'Extremities' in post['symptoms'] %} <p><b>* Limbs/Extremities:</b> {{ post['symptoms']['Extremities'] }}</p>  {% endif %}
+{% if 'Back' in post['symptoms'] %} <p><b>* Back:</b> {{ post['symptoms']['Back'] }}</p>  {% endif %}
+{% if 'Fever' in post['symptoms'] %} <p><b>* Fever:</b> {{ post['symptoms']['Fever'] }}</p>  {% endif %}
+{% if 'Sleep' in post['symptoms'] %} <p><b>* Sleep:</b> {{ post['symptoms']['Sleep'] }}</p>  {% endif %}
+{% if 'Skin' in post['symptoms'] %} <p><b>* Skin:</b> {{ post['symptoms']['Skin'] }}</p>  {% endif %}
+{% if 'Rectum' in post['symptoms'] %} <p><b>* Rectum:</b> {{ post['symptoms']['Rectum'] }}</p>  {% endif %}
+{% if 'Urine' in post['symptoms'] %} <p><b>* Urine:</b> {{ post['symptoms']['Urine'] }}</p>  {% endif %}
+{% if 'Stool' in post['symptoms'] %} <p><b>* Feces/Stool:</b> {{ post['symptoms']['Stool'] }}</p>  {% endif %}
+{% if 'Modalities' in post['symptoms'] %} <p><b>* Modalities:</b> {{ post['symptoms']['Modalities'] }}</p>  {% endif %}
+
+<!--
+{% if '' in post['symptoms'] %} <p><b>* :</b> {{ post['symptoms'][''] }}</p>  {% endif %}
+{% if '' in post['symptoms'] %} <p><b>* :</b> {{ post['symptoms'][''] }}</p>  {% endif %}
+-->
+{% endfor %}
+</div>
+{% endblock %}

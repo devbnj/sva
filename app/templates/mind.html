@@ -1,0 +1,55 @@
+<!-- templates/class.html -->
+
+{% extends "base2.html" %}
+
+{% block content %}
+<div cass="w3-container w3-row">
+<h1 class="w3-center">Mind Influences</h1>
+<h2 class="w3-center">Concerning times, transiting Graha over Natal Moon Influences the mind</h2>
+<p class="w3-center">Natal Moon Sign: {{mpost.sign}}, Nakshatra: {{mpost.nak}}, Navamsa: {{mpost.nav}}, Ashtakvarga points on the sign: {{mpost.astak}}</p>
+</div>
+
+<br />
+
+<div class="w3-container w3-card-2 w3-row">
+    <div class="w3-responsive">
+        <table class="w3-table-all">
+            <tr class="w3-black">
+                <th>Passing Graha</th>
+                <th>Nakshatra</th>
+                <th>Sign</th>
+                <th>House</th>
+                <th>Navamsa</th>
+                <th>Ashtak</th>
+                <th>Year - Mo</th>
+                <th>Concerns</th>
+            </tr>
+            {% for post in posts %}
+            <tr><td>{{ post.Collision }}</td>
+                <td>{{ post.Naks1 }}</td>
+                <td>{{ post.Sign1 }}</td>
+                <td>{{ post.House }}</td>
+                <td>{{ post.Nav1 }}</td>
+                <td>{{ post.ash }}</td>
+                <td>{{ post.Year }} - 
+                {{ post.Month }}</td>
+                <td>{{ post.result }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+      </div>
+      <p>Nakshatra denotes the time a Graha in transit crossed your Natal Moon coordinates. 
+          Any column on the Moon, you realize, relates to the Moon's pressure on the mind 
+          computed from its Natal longitudinal degrees. It is the mind factor. 
+          The person born at a certain time also accounts for other grahas which shadow 
+          the Moon's longitudinal coordinates frozen as a benchmark on human charts. 
+          Grahas that cross bring turmoil, sometimes its opposite - mental peace. 
+          The body and soul thereof find solitude. Dark-sided grahas such as Saturn, 
+          Rahu and Ketu overwhelm the thoughts into darker premises, whereas Sun, Mars 
+          ignite the souls fiery nature. They often incite other health problems; 
+          while Mercury sets a dialog mood, Venus brings our fine skills (art, love) 
+          to light, Jupiter sets a pattern to relax, but often turn obese.
+      </p>
+</div>
+
+{% endblock %}

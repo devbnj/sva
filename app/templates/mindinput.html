@@ -1,0 +1,38 @@
+<!-- templates/signup.html -->
+
+{% extends "base2.html" %}
+
+{% block content %}
+<div class="w3-padding w3-white w3-display-container">
+    <h3 class="title">Birth Info</h3>
+    <form method="POST" action="/mind/" class="w3-container">
+        <div class="w3-section">
+            <label>Date of Birth (Year / Month / Day)</label>
+            <input class="w3-input" type="text" name="yr" placeholder="1920" value="" required />
+            <input class="w3-input" type="text" name="mo" placeholder="12" value="" required />
+            <input class="w3-input" type="text" name="dy" placeholder="31" value="" required />
+        </div>
+
+        <div class="w3-section">
+            <label>Hour / Minute</label>
+            <input class="w3-input" type="text" name="hr" placeholder="23" value="" required/>
+            <input class="w3-input" type="text" name="mn" placeholder="59" value="" required/>
+        </div>
+
+        <div class="w3-section">
+            <label>Place (Longitude / Latitude / Time Zone)</label>
+            <input class="w3-input" type="text" name="ln" placeholder="88.3639" value="" required/>
+            <input class="w3-input" type="text" name="lt" placeholder="22.5726" value="" required/>
+            <input class="w3-input" type="text" name="tz" placeholder="+5.5" value="" required/>
+        </div>
+
+        <div class="w3-section">
+            <label>Year Range (Start year / end year)</label>
+            <input class="w3-input" type="text" name="sy" placeholder="2020" value="" required/>
+            <input class="w3-input" type="text" name="ey" placeholder="2022" value="" required/>
+        </div>
+
+        <button class="w3-button w3-center w3-blue w3-hover-purple">Start</button>
+    </form>
+</div>
+{% endblock %}

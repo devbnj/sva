@@ -1,0 +1,43 @@
+version: '3.1'
+
+# docker-compose.yaml
+# svaisvar_py
+# author devb
+# modified: 07/11/21
+
+services:
+
+  # app
+  sva:
+    build: .
+    ports:
+      - "8085:5000"
+    volumes:
+      - .:/sva
+    environment:
+      FLASK_ENV: development
+    networks:
+      - svan
+
+  # database
+  # mongodb_container:
+  #  image: localhost:5000/mongo:dev
+  #  environment:
+  #    MONGO_INITDB_ROOT_USERNAME: root
+  #    MONGO_INITDB_ROOT_PASSWORD: rootpassword
+  #  ports:
+  #    - 27017:27017
+  #  volumes:
+  #    - mongodb_data_container:/data/db
+  #  networks:
+  #    - vd
+
+# volume
+# volumes:
+  # mongodb_data_container:
+
+# docker networks
+networks:
+  svan:
+    driver: bridge
+

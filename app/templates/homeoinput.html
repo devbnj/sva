@@ -1,0 +1,45 @@
+<!-- templates/signup.html -->
+
+{% extends "base2.html" %}
+
+{% block content %}
+<div class="w3-padding w3-white w3-display-container">
+    <h3 class="title">Homeopathy</h3>
+    <form method="POST" action="/body/" class="w3-container">
+        <div class="w3-section">
+            <label>Materia Medica</label>
+            <select class="w3-select" name="tchar" id="tchar" required>
+                <option value="" disabled selected>Medica Name Starting with</option>
+                <option value="A">A (ex Aconitum, AlfaAlfa, Aloe, Aurum)</option>
+                <option value="B">B (ex Belladonna, Bismuth, Bryonia)</option>
+                <option value="C">C (ex Cactus, Calcarea, Calendula, Carbo Veg)</option>
+                <option value="D">D (ex Digitalis, Drosera, Dulcamara)</option>
+                <option value="E">E (ex Echinacea, Ergotinum, Euphrasia)</option>
+                <option value="F">F (ex Ferum, Formalin, Fraxinus)</option>
+                <option value="G">G (ex Galium, Ginseng, Graphites)</option>
+                <option value="H">H (ex Hedera, Hepar Sulph, Hypericum)</option>
+                <option value="I">I (ex Iberis, Ignatia, Insulin, Iodium)</option>
+                <option value="J">J (ex Jalapa, Juniperus)</option>
+                <option value="K">K (ex Kali Ferrous, Kali Phos, Kreosotum)</option>
+                <option value="L">L (ex Lecithin, Lycopodium)</option>
+                <option value="M">M (ex Magnesia, Malaria, Murex)</option>
+                <option value="N">N (ex Natrum Arsenica, Nux Vomica)</option>
+                <option value="O">O (ex Oleander, Opium, Ozone)</option>
+                <option value="P">P (ex Palladium, Phosphorous, Pulsatilla)</option>
+                <option value="Q">Q (ex Quassia, Quinidine)</option>
+                <option value="R">R (ex Rhodium, Rhododendron, Rhus Tox)</option>
+                <option value="S">S (ex Scorpio, Selenium, Sulphur)</option>
+                <option value="T">T (ex Tarentula, Thuja, Tilia)</option>
+                <option value="U">U (ex Urea, urinum, Urva ursi)</option>
+                <option value="V">V (ex Vanilla, Vespa, Vipera)</option>
+                <option value="W">W (ex Wyethia)</option>
+                <option value="X">X (ex Xray, Xanthium)</option>
+                <option value="Y">Y (ex Yohimbinum, Yucca)</option>
+                <option value="Z">Z (ex Zincum, Zingiber)</option>
+            </select>
+        </div>
+
+        <button class="w3-button w3-center w3-blue w3-hover-purple">Start</button>
+    </form>
+</div>
+{% endblock %}
