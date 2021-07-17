@@ -5,7 +5,28 @@
 {% block content %}
 <div class="w3-padding w3-white w3-display-container">
     <h3 class="title">Homeopathy</h3>
-    <form method="POST" action="/body/" class="w3-container">
+    <p class="w3-center">
+        While homeopathy can scarcely compare in antiquity with Chinese or Indian medicine, 
+        it is the longest established CAM (complementary alternate medicine) from 
+        Europe. Samuel Hahnemann (1755-1843) founded the principles as he grew up in Meissen 
+        in Germany, received his medical degree in Erlangen in 1779, 
+        and died a millionaire in Paris in 1843. Homeopathy is strangely an exact science. 
+        Our adverse reactions to the macro universe are curable by similar actions in 
+        the micro universe. To understand the true principles of Homeopathy is beyond the 
+        offerings of this Web App. However, the concept of like cured by likes is a principle 
+        used in modern vaccinations. Homeopathy is an exact science of symptomatic 
+        determination of disease. Incorrect symptoms or hastily arrived decisions can 
+        often result in incorrect diagnosis and medication, which has earned Homeopathy 
+        a bad name. Sometimes, it is impossible to go through the many iterations of symptomatic 
+        ailments. A stomach disorder is what we think of as the predominant symptom, 
+        but is it gastric, is it bilious, is it acidic are important symptom related questions. 
+        While we try to help you narrow down the symptoms precisely, we still encourage you to 
+        read the materia medica before selecting a Homeopathic medicine and dose. 
+        Most treatments begin with trial and error. In homeopathy or Chinese or Indian medicine, 
+        such prognosis comes as no surprise.
+    </p>
+    <p>Read more about it in <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1676328/">National Institute of Health (NIH) website</a></a> </p>
+    <form method="POST" name="f1" action="/body/" class="w3-container">
         <div class="w3-section">
             <label>Materia Medica</label>
             <select class="w3-select" name="tchar" id="tchar" required>
@@ -41,5 +62,46 @@
 
         <button class="w3-button w3-center w3-blue w3-hover-purple">Start</button>
     </form>
+
+
+    <form method="POST" name="f2" action="/body2/" class="w3-container">
+    <div class="w3-section">
+        <label>Symptoms</label>
+        <select class="w3-select" name="tchar2" id="tchar2" required>
+            <option value="" disabled selected>Symptoms</option>
+            <option value="burn">Burn</option>
+            <option value="calm">Calm</option>
+            <option value="chest">Chest</option>
+            <option value="cold">Cold</option>
+            <option value="cough">Cough</option>
+            <option value="cut">Cut</option>
+            <option value="diabetes">Diabetes</option>
+            <option value="diarrhoea">Diarrhoea</option>
+            <option value="dream">Dream(s)</option>
+            <option value="gout">Gout</option>            
+            <option value="headache">Headache</option>
+            <option value="heart">Heart</option>
+            <option value="indigestion">Indigestion</option>
+            <option value="insomnia">Insomnia</option>
+            <option value="itching">Itching</option>
+            <option value="lump">Lump</option>
+            <option value="malaria">Malaria</option>
+            <option value="mental">Mental</option>
+            <option value="nausea">Nausea</option>
+            <option value="peace">Peace</option>
+            <option value="rectum">Rectum</option>
+            <option value="rheumatism">Rheumatism</option>            
+            <option value="skin">Skin</option>
+            <option value="sleep">Sleep</option>
+            <option value="stomach">Stomach</option>
+            <option value="stroke">Stroke</option>
+            <option value="tuberculosis">Tuberculosis</option>            
+            <option value="vertigo">Vertigo</option>            
+        </select>
+    </div>
+
+    <button name="f2btn" class="w3-button w3-center w3-blue w3-hover-purple">Start</button>
+</form>
 </div>
+
 {% endblock %}

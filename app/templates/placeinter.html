@@ -1,0 +1,24 @@
+<!-- templates/signup.html -->
+
+{% extends "base2.html" %}
+
+{% block content %}
+<div class="w3-padding w3-white w3-display-container">
+    <h3 class="title w3-center">Place information</h3>
+    <form method="POST" action="/mind1/" class="w3-container">
+        <div class="w3-section">
+            <label>Place Results</label>
+            <select class="w3-select" name="plc" id="plc" required>
+                <option value="" disabled selected>Places Found ...</option>
+                {% for post in postplace %}
+                <option value="{{ post.id }}">{{ post.name }}</option>
+                {% endfor %}
+            </select>
+            <input name="iso" type="hidden" value={{ iso }} />
+            <input name="ctr" type="hidden" value={{ ctr }} />
+        </div>
+
+        <button class="w3-button w3-center w3-blue w3-hover-purple">Next</button>
+    </form>
+</div>
+{% endblock %}

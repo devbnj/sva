@@ -4,7 +4,7 @@
 
 {% block content %}
 <div cass="w3-container w3-row">
-<h1 class="w3-center">Homeopathy</h1>
+<h1 class="w3-center">Homeopathy {{ tpost }}</h1>
 </div>
 
 <br />
@@ -12,8 +12,10 @@
 <div class="w3-container w3-card-2 w3-row">
 {% for post in hpost %}
 <h2 class="w3-large"><span class="w3-orange w3-round-xxlarge">&nbsp; {{ post.name }}&nbsp; </span> {% if 'common_names' in post %} , Common Names: {{ post['common_names'] }} {% endif %}</h2>
-{% if 'details' in post %} <p><span class="w3-text-blue"><b>Details:</b></span> {{ post['details'] }}</p>  {% endif %}
+{% if 'details' in post %} <p><span class="w3-text-blue"><b>Details:</b></span> {{ post['details']|safe }}</p>  {% endif %}
 {% if 'dosage' in post %} <p><span class="w3-text-blue"><b>Dosage:</b></span> {{ post['dosage'] }}</p>  {% endif %}
+{% if 'symptoms' in post %} <p><span class="w3-text-blue"><b>Indications:</b></span></p>  {% endif %}
+
 {% if 'Mind' in post['symptoms'] %} <p><b>* Mind:</b> {{ post['symptoms']['Mind'] }}</p>  {% endif %}
 {% if 'Head' in post['symptoms'] %} <p><b>* Head:</b> {{ post['symptoms']['Head'] }}</p>  {% endif %}
 {% if 'Eyes' in post['symptoms'] %} <p><b>* Eyes:</b> {{ post['symptoms']['Eyes'] }}</p>  {% endif %}

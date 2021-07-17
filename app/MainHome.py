@@ -28,6 +28,7 @@ def dprint(txt):
         print(txt)
 # enddef
 
+# def
 def homerun(tchar):
     mypath = './static/'
     onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
@@ -41,6 +42,77 @@ def homerun(tchar):
                     tdata = json.load(home_file)
                     cumdata.append(tdata.copy())
     return cumdata
+# end def
+
+# def
+def homesrch(phr):
+    mypath = './static/'
+    onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
+    onlyfiles.sort()
+    cumdata = []
+    for file in onlyfiles:
+        if file.endswith(".json"):
+            filename = join(mypath, file)
+            with open(filename) as home_file:
+                tdata = json.load(home_file)
+                if checkPhrase(phr, tdata):
+                    rdata = replacePhrase(phr, tdata)
+                    cumdata.append(rdata.copy())
+    return cumdata    
+# end def
+
+# import re
+def replacePhrase(phrase, djson):
+    rson = djson
+    r = str(rson['details'])
+    # ns = ' *** ' + phrase + ' *** '
+    ns = '<span class="w3-yellow">' + phrase + '</span>'
+    # re.sub(phrase, ns, r, flags=re.I)
+    nr = r.replace(phrase, ns)
+    # print ('replaced', nr)
+    rson["details"] = nr
+    return rson
+
+# def
+def checkPhrase(phrase, djson):
+    result = False
+    r = deep_get(djson, 'details')
+    if r is not None:
+        # print(r)
+        if phrase in r: 
+            result = True
+        '''
+        or phrase in deep_get(d, 'symptoms.Mind') \
+        or phrase in deep_get(d, 'symptoms.Head') \
+        or phrase in deep_get(d, 'symptoms.Eyes') \
+        or phrase in deep_get(d, 'symptoms.Nose') \
+        or phrase in deep_get(d, 'symptoms.Ears') \
+        or phrase in deep_get(d, 'symptoms.Mouth') \
+        or phrase in deep_get(d, 'symptoms.Respiratory') \
+        or phrase in deep_get(d, 'symptoms.Throat') \
+        or phrase in deep_get(d, 'symptoms.Stomach') \
+        or phrase in deep_get(d, 'symptoms.Abdomen') \
+        or phrase in deep_get(d, 'symptoms.Heart') \
+        or phrase in deep_get(d, 'symptoms.Male') \
+        or phrase in deep_get(d, 'symptoms.Female') \
+        or phrase in deep_get(d, 'symptoms.Extremities') \
+        or phrase in deep_get(d, 'symptoms.Back') \
+        or phrase in deep_get(d, 'symptoms.Fever') \
+        or phrase in deep_get(d, 'symptoms.Sleep') \
+        or phrase in deep_get(d, 'symptoms.Skin') \
+        or phrase in deep_get(d, 'symptoms.Urine') \
+        or phrase in deep_get(d, 'symptoms.Stool') \
+        or phrase in deep_get(d, 'symptoms.Modalities'):
+        '''
+
+        #    result = True
+
+    return result
+# end def
+
+# print (homesrch('heart'))
+
+print (homesrch('lump'))
 
 '''
 for c in cumdata:

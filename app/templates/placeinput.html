@@ -1,0 +1,25 @@
+<!-- templates/signup.html -->
+
+{% extends "base2.html" %}
+
+{% block content %}
+<div class="w3-padding w3-white w3-display-container">
+    <h3 class="title w3-center">Place information</h3>
+    <p>This section runs through traditional astrology. You will however, not encounter any mind-boggling charts. What you will only see are years and months when the graha-forces held your mind captive. We prefer to call them grahas over planets, because Sun, Moon, Lunar Upper and Lower nodes are far from planets. If you cannot find a place, though the Atlas used by this system is extensive, please look for a place close by and then rectify the longitude and latitude as needed.</p>
+    <form method="POST" action="/mind0/" class="w3-container">
+        <div class="w3-section">
+            <label>Place (City, Town name) of Birth. Not where you live now.</label>
+            <input class="w3-input" type="text" name="place" placeholder="New York City" value="" required />
+            <label>Country</label>
+            <select class="w3-select" name="iso" id="iso" required>
+                <option value="" disabled selected>Places ...</option>
+                {% for post in postcountry %}
+                <option value="{{ post.iso }}">{{ post.country }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <button class="w3-button w3-center w3-blue w3-hover-purple">Next</button>
+    </form>
+</div>
+{% endblock %}

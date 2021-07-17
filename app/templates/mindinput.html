@@ -4,7 +4,18 @@
 
 {% block content %}
 <div class="w3-padding w3-white w3-display-container">
-    <h3 class="title">Birth Info</h3>
+    <h3 class="title w3-center">Birth Information</h3>
+    <p>Traditional astrologers associated the physical body to the ascendant, the mind to the moon's natal position (longitude) and the sun's longitudinal position to the soul's journey. 
+        Humans have debated on this sacred triangle of <b>the father-son-the holy ghost</b>, 
+        or the <b>body-mind-spirit</b> ever since we understood science and literature. 
+        The 'mind' application on this web site determines the seven planetary factors that 
+        influence mind. The <b>seven grahas</b> – Sun, Moon, Mercury, Venus, Mars, Jupiter and Saturn 
+        influence our lives in many ways. Add to that the Lunar Node, known in Vedic Astrology 
+        as Rahu. Rahu adds a shadowy twist to the influence. On this app, once you input your 
+        birth details such as date, place, timezone and the year range, the app runs its own 
+        engine to check how the combinations affect the mind in the past, present or future. 
+        The app does not store your information and you may have to enter every time you use 
+        the app.</p>
     <form method="POST" action="/mind/" class="w3-container">
         <div class="w3-section">
             <label>Date of Birth (Year / Month / Day)</label>
@@ -21,9 +32,11 @@
 
         <div class="w3-section">
             <label>Place (Longitude / Latitude / Time Zone)</label>
-            <input class="w3-input" type="text" name="ln" placeholder="88.3639" value="" required/>
-            <input class="w3-input" type="text" name="lt" placeholder="22.5726" value="" required/>
-            <input class="w3-input" type="text" name="tz" placeholder="+5.5" value="" required/>
+            <input class="w3-input" type="text" name="pl" placeholder="" value="{{ postplace['name'] }}" required/>
+            <input class="w3-input" type="text" name="ln" placeholder="" value="{{ postplace['lng'] }}" required/>
+            <input class="w3-input" type="text" name="lt" placeholder="" value="{{ postplace['lat'] }}" required/>
+            <input class="w3-input" type="text" name="tz" placeholder="" value="{{ postplace['gmt'] }}" required/>
+            <input class="w3-input" type="text" name="ds" placeholder="" value="{{ postplace['dst'] }}" required/>
         </div>
 
         <div class="w3-section">

@@ -3,7 +3,14 @@
 {% extends "base2.html" %}
 
 {% block content %}
-<h1 class="title">
-  Welcome {{ name }}
-</h1>
+<div class="w3-container w3-padding-large w3-center">
+<h1 class="w3-center">Welcome {{ name }}</h1>
+<ul class="w3-ul w3-card-4 w3-center">
+  <h2>Where do you want to go today?</h2>
+  <li>Check our resorts</li>
+  <li>Book a travel</li>
+  <li>Check the negative influences on mind <a href="/mind/" class="w3-button w3-blue">Mind</a></li>
+  <li>Get the right Homeopathy medicine <a href="/body/" class="w3-button w3-green">Body</a></li>
+</ul>
+</div>
 {% endblock %}

@@ -7,7 +7,9 @@ from flask import current_app as app
 from . import db
 from .models import Vivek
 from .MainEvents import run as moonrun
-from .MainHome import homerun
+from .MainHome import homerun, homesrch
+import sqlite3
+from sqlite3 import dbapi2 as sqlite
 
 pagecount = 1
 maxpage = 1
@@ -31,7 +33,52 @@ def travel():
 @main.route('/mind/')
 @login_required
 def mind():
-    return render_template('mindinput.html')
+    con = sqlite3.connect('atlas.db')
+    cur = con.cursor()
+    res = []
+    res2 = []
+    for row in cur.execute('select iso, country from CountryInfo'):
+        res.append({'iso':row[0], 'country': row[0] + ' | ' + row[1]})
+    return render_template('placeinput.html', postcountry=res)
+
+@main.route('/mind0/', methods=['POST'])
+@login_required
+def mind0():
+    con = sqlite3.connect('atlas.db')
+    cur = con.cursor()
+    iso = request.form.get('iso')
+    ctr = '%' + request.form.get('place') + '%'
+    # cur.execute("SELECT * FROM stocks WHERE symbol = '%s'" % symbol)
+    rst = []
+    res = {}
+
+    xsql = "SELECT A._idx, A.name, A.asciiname, A.alternatenames, B.iso, A.latitude, A.longitude, A.elevation, C.timezoneid, C.gmtoffset, C.dstoffset, C.rawoffset FROM GeoNames as A, CountryInfo AS B, Timezones AS C WHERE B.iso = (?) AND B._idx = A.country AND (A.name LIKE (?)) AND A.timezone = C._idx ORDER BY A.name"
+    for row in cur.execute(xsql, (iso, ctr)):
+        res['id'] = row[0]
+        res['name'] = str(row[1]) + "|Alt:" + str(row[3]) +"|Lat: "+ str(row[5]) + "|Lng: " + str(row[6]) + "|TZ:"+ str(row[8])
+        rst.append(res.copy())
+    # print ('res', rst)
+    return render_template('placeinter.html', postplace=rst, iso=iso, ctr=ctr)    
+
+@main.route('/mind1/', methods=['POST'])
+@login_required
+def mind1():
+    con = sqlite3.connect('atlas.db')
+    cur = con.cursor()
+    iso = request.form.get('iso')
+    ctr = '%' + request.form.get('ctr') + '%'
+    plc = request.form.get('plc')
+    res = {}
+
+    xsql = "SELECT A._idx, A.name, A.asciiname, A.alternatenames, B.iso, A.latitude, A.longitude, A.elevation, C.timezoneid, C.gmtoffset, C.dstoffset, C.rawoffset FROM GeoNames as A, CountryInfo AS B, Timezones AS C WHERE A._idx = (?) AND B.iso = (?) AND B._idx = A.country AND (A.name LIKE (?)) AND A.timezone = C._idx ORDER BY A.name"
+    for row in cur.execute(xsql, (plc, iso, ctr)):
+        res['name'] = str(row[1]) + ', ' + str(row[4])
+        res['lng'] = str(row[6]) 
+        res['lat'] = str(row[5]) 
+        res['gmt'] = str(row[9]) 
+        res['dst'] = str(row[10]) 
+    print ('res', res)
+    return render_template('mindinput.html', postplace=res)    
 
 @main.route('/mind/', methods=['POST'])
 @login_required
@@ -61,7 +108,15 @@ def bodypost():
     # print ("Got Hit")
     tc = request.form.get('tchar')
     f = homerun(tc)
-    return render_template('homeo.html', name=current_user.name, hpost=f)
+    return render_template('homeo.html', name=current_user.name, hpost=f, tpost='List Alphabetically')
+
+@main.route('/body2/', methods=['POST'])
+@login_required
+def body2post():
+    # print ("Got Hit")
+    tc = request.form.get('tchar2')
+    f = homesrch(tc)
+    return render_template('homeo.html', name=current_user.name, hpost=f, tpost='Search by '+tc)    
 
 @main.route('/profile/')
 @login_required
