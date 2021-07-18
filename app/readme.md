@@ -1,22 +1,10 @@
-pip3 install -r requirements.txt
+# Sva - SpiritBM.com
+## Sva comprises several apps to offer a composite web application that can serve the living
+### Its docker based
 
-flask run -h 0.0.0.0 -p 8080
+After you clone the github repository
+'''
+docker-compose up -d --build
+'''
 
-CREATE TABLE user (
-        id INTEGER NOT NULL, 
-        email VARCHAR(100), 
-        password VARCHAR(100), 
-        name VARCHAR(1000), rigved text, 
-        PRIMARY KEY (id), 
-        UNIQUE (email)
-);
-
-create table vivek (id integer not null, sayings text);
-
-#### sqlite3 
-.tables -- list all tables
-.schema -- list all schema and indices
-
-'info@devb.com', '123456'
-
-/usr/local/lib/python3.6/dist-packages/
+Point your browser to localhost:8085
