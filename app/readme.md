@@ -4,8 +4,8 @@
 
 After you clone the github repository
 
-'''
+<code>
 docker-compose up -d --build
-'''
+</code>
 
 Point your browser to localhost:8085
