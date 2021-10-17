@@ -1,0 +1,74 @@
+<!-- templates/class.html -->
+
+{% extends "base2.html" %}
+
+{% block content %}
+<div cass="w3-container w3-row">
+<h1 class="w3-center">Spirit Influences</h1>
+<h2 class="w3-center">Concerning times, transiting Graha over Natal Sun Influences the spirit</h2>
+<p class="w3-center">Natal Sun Sign: {{mpost.sign}}, Nakshatra: {{mpost.nak}}, Navamsa: {{mpost.nav}}, Ashtakvarga points on its natal sign: {{mpost.astak}}</p>
+</div>
+
+<br />
+<div class="w3-container w3-card-2 w3-row">
+<form method="POST" id="mi3form" action="/spirit/" class="w3-container">
+    <input type="hidden" name="yr" value="{{ mdt['yr'] }}" />
+    <input type="hidden" name="mo" value="{{ mdt['mo'] }}" />
+    <input type="hidden" name="dy" value="{{ mdt['dy'] }}" />
+    <input type="hidden" name="hr" id="hr" value="{{ mdt['hr'] }}" />
+    <input type="hidden" name="mn" id="mn" value="{{ mdt['mn'] }}" />
+    <input type="hidden" name="ln" value="{{ mdt['ln'] }}" />
+    <input type="hidden" name="lt" value="{{ mdt['lt'] }}" />
+    <input type="hidden" name="tz" value="{{ mdt['tz'] }}" />
+    <input type="hidden" name="sy" id="sy" value="{{ mdt['sy'] }}" />
+    <input type="hidden" name="ey" id="ey" value="{{ mdt['ey'] }}" />
+    <button type="submit" class="w3-button w3-right w3-blue w3-hover-purple" id="rbtn">Continue ...</button>
+</form>
+</div>
+
+<div class="w3-container w3-card-2 w3-row">
+    <div class="w3-responsive">
+        <table class="w3-table-all">
+            <tr class="w3-black">
+                <th>Passing Graha</th>
+                <th>Long. Spd</th>
+                <th>Ret</th>
+                <th>Nakshatra</th>
+                <th>Sign</th>
+                <th>House</th>
+                <th>Navamsa</th>
+                <th>Ashtak</th>
+                <th>Year - Mo</th>
+                <th>Concerns</th>
+            </tr>
+            {% for post in posts %}
+            <tr><td>{{ post.Collision }}</td>
+                <td>{{ post.Spd }}</td>
+                <td>{{ post.Ret }}</td>
+                <td>{{ post.Naks1 }}</td>
+                <td>{{ post.Sign1 }}</td>
+                <td>{{ post.House }}</td>
+                <td>{{ post.Nav1 }}</td>
+                {% if post['ash'] == -1 %}<td></td>{% endif %}
+                {% if post['ash'] != -1 %}<td>{{ post['ash'] }}</td>{% endif %}
+                <td>{{ post.Year }} - 
+                {{ post.Month }}</td>
+                <td>{{ post.result }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+      </div>
+      <p>(R) shows the Crossing Graha is in retrogression. Means it is receding back. 
+        (RZ) indicates it is close to stopping in its zodiacal path. Motion of the
+        grahas is how we see them relatively from earth. They never stop their
+        orbital motion, but from earth they seem to be retracing their path. Rahu and Ketu always
+        have a R-motion. Jupiter and Saturn often bestow good results in their R-motion.
+    </p>
+
+      <p>The table above denotes the time a Graha in transit crossed your Natal Sun. 
+          Any column on the table on the Sun, relates to the mind's and the body's detachment 
+          from the spirit. A deviation from the chosen path. 
+      </p>
+</div>
+
+{% endblock %}

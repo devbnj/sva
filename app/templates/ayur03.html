@@ -1,0 +1,192 @@
+<!-- templates/class.html -->
+
+{% extends "base2.html" %}
+
+{% block content %}
+{% include "aycomm.html" %}
+
+<br />
+<div class="w3-container w3-row">
+    <p class="w3-large">Score so far: Vata: {{ vs }}, Pitta: {{ ps }}, and Kapha: {{ ks }}.</p>
+</div>
+
+<div class="w3-container w3-row">
+    <h1>Determining your Doshas Part 2</h1>
+    <p>Continuing with the questions </p>
+    <div class="w3-container w3-card-4">
+        <h3>Physical</h3>
+        <form role="form" id="question-form" name="question-form" method="POST" action="/const02/"
+            class="w3-container w3-card w3-padding">
+            <h3>Internal</h3>
+            <div class="form-group">
+                <label for="seljoints">17 How are your joints? </label>
+                <select class="w3-input" name="seljoints">
+                    <option value="k">Large, well lubricated</option>
+                    <option value="v">Cold, cracking</option>
+                    <option value="p">Moderate</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="selappetite">18 Appetite? </label>
+                <select class="w3-input" name="selappetite">
+                    <option value="p">Intense</option>
+                    <option value="k">Consistent</option>
+                    <option value="v">Irregular, scanty</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="seltaste">19 Food preference </label>
+                <select class="w3-input" name="seltaste">
+                    <option value="p">Sweet, bitter, astringent</option>
+                    <option value="v">Sweet, sour, salted</option>
+                    <option value="k">Bitter, pungent, astringent</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="seldigest">20 Digestion </label>
+                <select class="w3-input" name="seldigest">
+                    <option value="k">Prolonged, forms mucus</option>
+                    <option value="v">Irregular, gas forms</option>
+                    <option value="p">Quick, causes burning</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="selevacuate">21 Evacuation </label>
+                <select class="w3-input" name="selevacuate">
+                    <option value="p">Loose, regular, large quantity</option>
+                    <option value="v">Constipated, irregular, small</option>
+                    <option value="k">Slow, regular, moderate quantity</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="selthirst">22 Thirst </label>
+                <select class="w3-input" name="selthirst">
+                    <option value="v">Changeable</option>
+                    <option value="p">Surplus</option>
+                    <option value="k">Sparse</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="selperspire">23 Perspiration </label>
+                <select class="w3-input" name="selperspire">
+                    <option value="p">Profuse</option>
+                    <option value="v">Scanty</option>
+                    <option value="k">Moderate</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="selactivity">24 Physical activity </label>
+                <select class="w3-input" name="selactivity">
+                    <option value="k">Sedentary</option>
+                    <option value="v">Hyperactive</option>
+                    <option value="p">Moderate</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="selmental">25 Mental activity </label>
+                <select class="w3-input" name="selmental">
+                    <option value="v">Always active</option>
+                    <option value="k">Dull, slow</option>
+                    <option value="p">Moderate</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="selstamina">26 Stamina</label>
+                <select class="w3-input" name="selstamina">
+                    <option value="v">Poor, exertive</option>
+                    <option value="k">Excellent, lackadaisical</option>
+                    <option value="p">Moderate, driven</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="selsleep">27 Sleep</label>
+                <select class="w3-input" name="selsleep">
+                    <option value="p">Moderate, light</option>
+                    <option value="v">Poor, variable</option>
+                    <option value="k">Long, deep</option>
+                </select>
+            </div>
+    </div>
+    <br />
+
+    <div class="w3-container w3-card-4">
+        <h3>Emotional</h3>
+        <div class="form-group">
+            <label for="selemotion">28 Emotions</label>
+            <select class="w3-input" name="selemotion">
+                <option value="v">Anxiety, fear, uncertainty, flexible</option>
+                <option value="k">Calm, greedy, attachment</option>
+                <option value="p">Anger, hate, jealousy, determination</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="seltemperament">29 Temperament</label>
+            <select class="w3-input" name="seltemperament">
+                <option value="p">Angry, intelligent, arrogant, successful</option>
+                <option value="v">Fearful, indecisive, nervous, perceptive</option>
+                <option value="k">Greedy, calm, stable, stubborn</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="selintellect">30 Intellect</label>
+            <select class="w3-input" name="selintellect">
+                <option value="p">Quick to learn, forget slowly</option>
+                <option value="v">Quick to learn, quick to forget</option>
+                <option value="k">Slow learner, retain longer</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="selspeech">31 Speech</label>
+            <select class="w3-input" name="selspeech">
+                <option value="v">Erratic, talkative, rapid, unclear</option>
+                <option value="k">Slow, cautious, monotonous</option>
+                <option value="p">Decisive, articulate, sharp, penetrating</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="selfaith">32 Faith</label>
+            <select class="w3-input" name="selfaith">
+                <option value="v">Variable, changeable</option>
+                <option value="p">Intense, fanatical</option>
+                <option value="k">Consistent, deep, mellow</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="selspiritual">33 Spirituality</label>
+            <select class="w3-input" name="selspiritual">
+                <option value="v">Spiritually disciplined</option>
+                <option value="k">Materialistic</option>
+                <option value="p">Tendency to materialism</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="seldream">34 Dreams</label>
+            <select class="w3-input" name="seldream">
+                <option value="v">Flying, fearful, erratic, quick, active, many</option>
+                <option value="k">Lakes, snow, romantic, sensual, long sequences</option>
+                <option value="p">Fiery, violent, intense, war</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="selsex">35 Sexuality</label>
+            <select class="w3-input" name="selsex">
+                <option value="p">Hot, intense</option>
+                <option value="v">Cold, variable</option>
+                <option value="k">Warm, enduring</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="selfinance">36 Finances</label>
+            <select class="w3-input" name="selfinance">
+                <option value="v">Shortage, spends on trifles</option>
+                <option value="p">Spend on luxuries</option>
+                <option value="k">Rich but a miser</option>
+            </select>
+        </div>
+        <p><button type="submit" class="w3-btn w3-black w3-hover-purple" id="questdosha">How's the progress?</button></p>
+    </div>
+    <hr />
+    </form>
+</div>
+
+{% endblock %}

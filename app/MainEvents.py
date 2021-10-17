@@ -6,7 +6,8 @@ import datetime
 import math
 
 swe.set_ephe_path(
-    "/home/devbnjhp/nodejs/swisseph2_7/ephe"
+    # "/Users/devbhattacharyya/Downloads/nodejs/swisseph2_7/ephe"
+    "./libswe"
 )  # set path to ephemeris files
 import json
 
@@ -126,26 +127,35 @@ def computeAstro(yy, mm, dd, hr, mi, tz, lng, lat):
     res["mo"] = mm
     sun = swe.calc_ut(jd, swe.SUN, flag)
     res["sun"] = sun[0][0]
+    res["sunsp"] = sun[0][3]
     moo = swe.calc_ut(jd, swe.MOON, flag)
     res["moo"] = moo[0][0]
+    res["moosp"] = moo[0][3]
     mer = swe.calc_ut(jd, swe.MERCURY, flag)
     res["mer"] = mer[0][0]
+    res["mersp"] = mer[0][3]
     ven = swe.calc_ut(jd, swe.VENUS, flag)
     res["ven"] = ven[0][0]
+    res["vensp"] = ven[0][3]
     mar = swe.calc_ut(jd, swe.MARS, flag)
     res["mar"] = mar[0][0]
+    res["marsp"] = mar[0][3]
     jup = swe.calc_ut(jd, swe.JUPITER, flag)
     res["jup"] = jup[0][0]
+    res["jupsp"] = jup[0][3]
     sat = swe.calc_ut(jd, swe.SATURN, flag)
     res["sat"] = sat[0][0]
+    res["satsp"] = sat[0][3]
     rah = swe.calc_ut(jd, swe.MEAN_NODE, flag)
     res["rah"] = rah[0][0]
+    res["rahsp"] = rah[0][3]
     # ketu is calculated from rahu
     kl = rah[0][0] + 180.0
     if kl > 360:
         kl -= 360
     ket = kl
     res["ket"] = ket
+    res["ketsp"] = rah[0][3]
     asc = getSign(lag[0])
     res["Asc"] = asc
     res['lag'] = lag[0]
@@ -170,11 +180,16 @@ def add_one_month(yy, mm):
 d2 = 13.3333333333
 
 # def
-def getRec(name, plnt1, natmoon, asc, year, month, atk):
+def getRec(name, plnt1, spd, natmoon, asc, year, month, atk):
     drec = {}
     drec["Collision"] = name
     drec["Naks1"] = naks27[int(plnt1 / d2)]
-    # drec["Naks2"] = naks27[int(natmoon / d2)]
+    drec["Spd"] = "{:6.4f}".format(spd)
+    drec["Ret"] = ""
+    if spd < 0:
+        drec["Ret"] = "R"
+    if spd < 0.05 and spd > -0.05:
+        drec["Ret"] = drec["Ret"] + "Z"
     drec["Sign1"] = getSign(plnt1)
     # drec["Sign2"] = getSign(natmoon)
     drec["House"] = getHouse(plnt1, asc)
@@ -224,18 +239,7 @@ def run(yr, mo, dy, hr, mi, tz, ln, lt, styr, enyr):
     whyear1 = styr
     whyear2 = enyr
     dlower = natData["moo"] - orb
-    # if dlower < 0:
-    #    dlower += 360
     dhigher = natData["moo"] + orb
-    # if dhigher > 360:
-    #    dhigher = dhigher - 360
-    """
-    if dlower > dhigher:
-        dtemp = dhigher
-        dhigher = dlower
-        dlower = dtemp
-    """
-    print(dhigher, dlower)
 
     for i in range(1, 1440):
         # set a small year range
@@ -247,6 +251,7 @@ def run(yr, mo, dy, hr, mi, tz, ln, lt, styr, enyr):
                 rec = getRec(
                     "Saturn/Moon",
                     colls[i]["sat"],
+                    colls[i]["satsp"],
                     natData["moo"],
                     natData["Asc"],
                     colls[i]["yr"],
@@ -262,13 +267,14 @@ def run(yr, mo, dy, hr, mi, tz, ln, lt, styr, enyr):
                 rec = getRec(
                     "Jupiter/Moon",
                     colls[i]["jup"],
+                    colls[i]["jupsp"],
                     natData["moo"],
                     natData["Asc"],
                     colls[i]["yr"],
                     colls[i]["mo"],
                     mAstak
                 )
-                rec["result"] = "Hurdles. Mental tensions. Fear and anxiety"
+                rec["result"] = "Hurdles. Mental tensions. Fear and anxiety. Even the Nadi priciples warn of health issues"
                 result.append(rec.copy())
             # Ven, sun, mars, merc over moon
             if colls[i]["ven"] >= dlower and colls[i]["ven"] <= dhigher:
@@ -277,6 +283,7 @@ def run(yr, mo, dy, hr, mi, tz, ln, lt, styr, enyr):
                 rec = getRec(
                     "Venus/Moon",
                     colls[i]["ven"],
+                    colls[i]["vensp"],
                     natData["moo"],
                     natData["Asc"],
                     colls[i]["yr"],
@@ -291,6 +298,7 @@ def run(yr, mo, dy, hr, mi, tz, ln, lt, styr, enyr):
                 rec = getRec(
                     "Sun/Moon",
                     colls[i]["sun"],
+                    colls[i]["sunsp"],
                     natData["moo"],
                     natData["Asc"],
                     colls[i]["yr"],
@@ -305,6 +313,7 @@ def run(yr, mo, dy, hr, mi, tz, ln, lt, styr, enyr):
                 rec = getRec(
                     "Mars/Moon",
                     colls[i]["mar"],
+                    colls[i]["marsp"],
                     natData["moo"],
                     natData["Asc"],
                     colls[i]["yr"],
@@ -319,6 +328,7 @@ def run(yr, mo, dy, hr, mi, tz, ln, lt, styr, enyr):
                 rec = getRec(
                     "Mercury/Moon",
                     colls[i]["mer"],
+                    colls[i]["mersp"],
                     natData["moo"],
                     natData["Asc"],
                     colls[i]["yr"],
@@ -335,18 +345,20 @@ def run(yr, mo, dy, hr, mi, tz, ln, lt, styr, enyr):
                 rec = getRec(
                     "Rahu/Moon",
                     colls[i]["rah"],
+                    colls[i]["rahsp"],
                     natData["moo"],
                     natData["Asc"],
                     colls[i]["yr"],
                     colls[i]["mo"],
                     mAstak
                 )
-                rec["result"] = "Squandering Money. Careless. Mentally disturbed. Lack of peace of mind"
+                rec["result"] = "Squandering Money. Careless. Mentally disturbed. Lack of peace of mind. By Nadi principles, mental unrest, tendecy towards black-magic."
                 result.append(rec.copy())
             if colls[i]["ket"] >= dlower and colls[i]["ket"] <= dhigher:
                 rec = getRec(
                     "Ketu/Moon",
                     colls[i]["ket"],
+                    colls[i]["ketsp"],
                     natData["moo"],
                     natData["Asc"],
                     colls[i]["yr"],
@@ -354,6 +366,172 @@ def run(yr, mo, dy, hr, mi, tz, ln, lt, styr, enyr):
                     -1,
                 )
                 rec["result"] = "Mental tensions. Health is down. Loss of reputation"
+                result.append(rec.copy())
+
+    return mResult, result
+# endef
+
+#def
+def sunrun(yr, mo, dy, hr, mi, tz, ln, lt, styr, enyr):
+    orb = 8  # assuming influence within 8 degrees
+
+    natData = computeAstro(yr, mo, dy, hr, mi, tz, ln, lt)
+    ma = findAshtakVarga(natData)
+
+    # benchmark against the sun
+    msign = math.floor(natData["sun"] / 30 + 1)
+    mAstemp = ma['sun']
+    mAstak = mAstemp[msign - 1]
+    
+    mResult = {}
+    mResult["sign"] = msign
+    mResult["astak"] = mAstak
+    mResult["nak"] = naks27[int(natData["sun"] / d2)]
+    mResult['nav'] = getNavamsa(int(natData["sun"]))
+
+    colls = []
+    yr1 = yr
+    mo1 = mo
+    result = []
+    rec = {}
+
+    colls.append(natData.copy())
+
+    for i in range(1, 1440):
+        yr1, mo1 = add_one_month(yr1, mo1)
+        rdata = computeAstro(yr1, mo1, dy, hr, mi, tz, ln, lt)
+        colls.append(rdata.copy())
+
+    whyear1 = styr
+    whyear2 = enyr
+    dlower = natData["sun"] - orb
+    dhigher = natData["sun"] + orb
+
+    for i in range(1, 1440):
+        # set a small year range
+        if colls[i]["yr"] >= whyear1 and colls[i]["yr"] <= whyear2:
+            # Sade Sathi - Saturn over Natal Moon
+            if colls[i]["sat"] >= dlower and colls[i]["sat"] <= dhigher:
+                mAstemp = ma['sat']
+                mAstak = mAstemp[msign - 1]
+                rec = getRec(
+                    "Saturn/Sun",
+                    colls[i]["sat"],
+                    colls[i]["satsp"],
+                    natData["sun"],
+                    natData["Asc"],
+                    colls[i]["yr"],
+                    colls[i]["mo"],
+                    mAstak
+                )
+                rec["result"] = ""
+                result.append(rec.copy())
+            # Jup over moon, good tidings
+            if colls[i]["jup"] >= dlower and colls[i]["jup"] <= dhigher:
+                mAstemp = ma['jup']
+                mAstak = mAstemp[msign - 1]
+                rec = getRec(
+                    "Jupiter/Sun",
+                    colls[i]["jup"],
+                    colls[i]["jupsp"],
+                    natData["sun"],
+                    natData["Asc"],
+                    colls[i]["yr"],
+                    colls[i]["mo"],
+                    mAstak
+                )
+                rec["result"] = ""
+                result.append(rec.copy())
+            # Ven, sun, mars, merc over moon
+            if colls[i]["ven"] >= dlower and colls[i]["ven"] <= dhigher:
+                mAstemp = ma['ven']
+                mAstak = mAstemp[msign - 1]
+                rec = getRec(
+                    "Venus/Sun",
+                    colls[i]["ven"],
+                    colls[i]["vensp"],
+                    natData["sun"],
+                    natData["Asc"],
+                    colls[i]["yr"],
+                    colls[i]["mo"],
+                    mAstak
+                )
+                rec["result"] = ""
+                result.append(rec.copy())
+            if colls[i]["moo"] >= dlower and colls[i]["moo"] <= dhigher:
+                mAstemp = ma['moo']
+                mAstak = mAstemp[msign - 1]
+                rec = getRec(
+                    "Moon/Sun",
+                    colls[i]["moo"],
+                    colls[i]["moosp"],
+                    natData["sun"],
+                    natData["Asc"],
+                    colls[i]["yr"],
+                    colls[i]["mo"],
+                    mAstak
+                )
+                rec["result"] = ""
+                result.append(rec.copy())
+            if colls[i]["mar"] >= dlower and colls[i]["mar"] <= dhigher:
+                mAstemp = ma['mar']
+                mAstak = mAstemp[msign - 1]
+                rec = getRec(
+                    "Mars/Sun",
+                    colls[i]["mar"],
+                    colls[i]["marsp"],
+                    natData["sun"],
+                    natData["Asc"],
+                    colls[i]["yr"],
+                    colls[i]["mo"],
+                    mAstak
+                )
+                rec["result"] = ""
+                result.append(rec.copy())
+            if colls[i]["mer"] >= dlower and colls[i]["mer"] <= dhigher:
+                mAstemp = ma['mer']
+                mAstak = mAstemp[msign - 1]
+                rec = getRec(
+                    "Mercury/Sun",
+                    colls[i]["mer"],
+                    colls[i]["mersp"],
+                    natData["sun"],
+                    natData["Asc"],
+                    colls[i]["yr"],
+                    colls[i]["mo"],
+                    mAstak
+                )
+                rec["result"] = ""
+                result.append(rec.copy())
+
+            # Rah over moo, health
+            if colls[i]["rah"] >= dlower and colls[i]["rah"] <= dhigher:
+                mAstemp = ma['rah']
+                mAstak = mAstemp[msign - 1]
+                rec = getRec(
+                    "Rahu/Sun",
+                    colls[i]["rah"],
+                    colls[i]["rahsp"],
+                    natData["sun"],
+                    natData["Asc"],
+                    colls[i]["yr"],
+                    colls[i]["mo"],
+                    mAstak
+                )
+                rec["result"] = ""
+                result.append(rec.copy())
+            if colls[i]["ket"] >= dlower and colls[i]["ket"] <= dhigher:
+                rec = getRec(
+                    "Ketu/Sun",
+                    colls[i]["ket"],
+                    colls[i]["ketsp"],
+                    natData["sun"],
+                    natData["Asc"],
+                    colls[i]["yr"],
+                    colls[i]["mo"],
+                    -1,
+                )
+                rec["result"] = ""
                 result.append(rec.copy())
 
     return mResult, result

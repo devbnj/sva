@@ -1,0 +1,14 @@
+<!-- templates/class.html -->
+
+{% extends "base2.html" %}
+
+{% block content %}
+{% include "aycomm.html" %}
+
+<br />
+<div class="w3-container w3-row">
+    <p class="w3-center w3-large">Total Score: Vata: {{ vs }}, Pitta: {{ ps }}, and Kapha: {{ ks }}.</p>
+    <p class="w3-center w3-large">It appears your body humor tends towards {{ chk }}. When selecting herbs or diet, stay away from activities, diet, weather that are {{ chk }}-like.</p>
+</div>
+
+{% endblock %}

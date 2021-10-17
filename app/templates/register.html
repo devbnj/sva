@@ -5,6 +5,11 @@
 {% block content %}
 <div class="w3-padding w3-white w3-display-container">
     <h3 class="title">Register</h3>
+    <h4>Why register?</h4>
+    <p>Register - just to enhance your experience and ensure your privacy. At SpiritBM, 
+        we do not store any information other than your profile. The entire
+        app code is available in GitHub. We honor the transparency.
+    </p>
     <div class="box">
         {% with messages = get_flashed_messages() %}
         {% if messages %}
@@ -28,12 +33,6 @@
                     <label>Password</label>
                     <input class="w3-input" type="password" name="password" placeholder="Password" value="" />
                 </div>
-
-                <div class="w3-section">
-                    <label>Chainbelow key</label>
-                    <input class="w3-input" type="text" name="splkey" placeholder="Bhagavad Gita Key" value="" />
-                </div>
-
             <button class="w3-button w3-center w3-blue w3-hover-purple">Register</button>
         </form>
     </div>

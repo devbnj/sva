@@ -107,14 +107,23 @@ if kl > 360:
 ket = kl
 
 printNak ('lag', lag[0])
-printNak ('sun', sun[0][0])
+# Longitude, Latitude, Distance in AU, Speed in longitude (deg/day), Speed in latitude (deg/day)
+# Speed in distance (AU/day)
+
+# printNak ('sun', sun[0][0])
+print ('1 sun', sun)
+print ('2 sun', sun[0][0], sun[0][3])
+
 printNak ('moo', moo[0][0])
-printNak ('mar', mar[0][0])
-printNak ('ven', ven[0][0])
+# printNak ('mar', mar[0][0])
+# printNak ('ven', ven[0][0])
+print ('mar', mar)
+print ('ven', ven)
 printNak ('mer', mer[0][0])
 printNak ('jup', jup[0][0])
 printNak ('sat', sat[0][0])
-printNak ('rah', rah[0][0])
+# printNak ('rah', rah[0][0])
+print ('rah', rah)
 printNak ('ket', ket)
 
 

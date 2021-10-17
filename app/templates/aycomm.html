@@ -1,0 +1,13 @@
+<div cass="w3-container w3-row">
+    <h1 class="w3-center">Ayurveda - {{ hding }}</h1>
+    <span class="w3-center">
+        <span class="w3-circle w3-red w3-padding-8">&nbsp;{{ pg }}&nbsp;</span> /&nbsp;
+        <span class="w3-circle w3-black w3-padding-8">&nbsp;{{ mx }}&nbsp;</span>&nbsp;
+        <a class="w3-btn w3-blue" href="{{ url_for('main.prev') }}">Prev</a>&nbsp;
+        <a class="w3-btn w3-green" href="{{ url_for('main.nextc') }}">Next</a>&nbsp;
+        <a class="w3-btn w3-purple" href="{{ url_for('main.constitute') }}">Constitution</a>&nbsp;
+        <a class="w3-btn w3-black" href="https://www.nccih.nih.gov/health/ayurvedic-medicine-in-depth">NIH Reference</a>&nbsp;
+        <a class="w3-btn w3-pink" href="{{ url_for('main.asrch') }}">Symptoms</a>&nbsp;
+        <a class="w3-btn w3-deep-orange" href="{{ url_for('main.tsrch') }}">Herbs</a>
+    </span>
+</div>

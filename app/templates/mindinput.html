@@ -16,36 +16,59 @@
         engine to check how the combinations affect the mind in the past, present or future. 
         The app does not store your information and you may have to enter every time you use 
         the app.</p>
-    <form method="POST" action="/mind/" class="w3-container">
+    <form method="POST" id="miform" action="/mind/" class="w3-container">
+    <!-- form method="POST" id="miform" action="javascript:alert( 'success!' );" class="w3-container" -->
         <div class="w3-section">
             <label>Date of Birth (Year / Month / Day)</label>
-            <input class="w3-input" type="text" name="yr" placeholder="1920" value="" required />
-            <input class="w3-input" type="text" name="mo" placeholder="12" value="" required />
-            <input class="w3-input" type="text" name="dy" placeholder="31" value="" required />
+            <input class="w3-input" type="number" name="yr" id="yr" placeholder="1920" value="" required />
+            <input class="w3-input" type="number" name="mo" id="mo" placeholder="12" value="" required />
+            <input class="w3-input" type="number" name="dy" id="dy" placeholder="31" value="" required />
         </div>
 
         <div class="w3-section">
             <label>Hour / Minute</label>
-            <input class="w3-input" type="text" name="hr" placeholder="23" value="" required/>
-            <input class="w3-input" type="text" name="mn" placeholder="59" value="" required/>
+            <input class="w3-input" type="number" name="hr" id="hr" placeholder="23" value="" required/>
+            <input class="w3-input" type="number" name="mn" id="mn" placeholder="59" value="" required/>
         </div>
 
         <div class="w3-section">
-            <label>Place (Longitude / Latitude / Time Zone)</label>
-            <input class="w3-input" type="text" name="pl" placeholder="" value="{{ postplace['name'] }}" required/>
-            <input class="w3-input" type="text" name="ln" placeholder="" value="{{ postplace['lng'] }}" required/>
-            <input class="w3-input" type="text" name="lt" placeholder="" value="{{ postplace['lat'] }}" required/>
-            <input class="w3-input" type="text" name="tz" placeholder="" value="{{ postplace['gmt'] }}" required/>
-            <input class="w3-input" type="text" name="ds" placeholder="" value="{{ postplace['dst'] }}" required/>
+            <label>Place (Longitude / Latitude / Time Zone / Daylight Savings TZ)</label>
+            <input class="w3-input" type="text" name="pl" placeholder="" value="{{ postplace['name'] }}" readonly/>
+            <input class="w3-input" type="text" name="ln" placeholder="" value="{{ postplace['lng'] }}" readonly/>
+            <input class="w3-input" type="text" name="lt" placeholder="" value="{{ postplace['lat'] }}" readonly/>
+            <input class="w3-input" type="text" name="tz" placeholder="" value="{{ postplace['gmt'] }}" readonly/>
+            <input class="w3-input" type="text" name="ds" placeholder="" value="{{ postplace['dst'] }}" readonly/>
         </div>
 
         <div class="w3-section">
             <label>Year Range (Start year / end year)</label>
-            <input class="w3-input" type="text" name="sy" placeholder="2020" value="" required/>
-            <input class="w3-input" type="text" name="ey" placeholder="2022" value="" required/>
+            <input class="w3-input" type="number" name="sy" id="sy" placeholder="2020" value="" required/>
+            <input class="w3-input" type="number" name="ey" id="ey"placeholder="2022" value="" required/>
         </div>
-
-        <button class="w3-button w3-center w3-blue w3-hover-purple">Start</button>
+        <a href="{{ url_for('main.mind') }}" class="w3-button w3-red">Back</a>&nbsp;&nbsp;
+        <button type="submit" class="w3-button w3-center w3-blue w3-hover-purple" id="sbtn">Start</button>
     </form>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$( "#miform" ).submit(function( event ) {
+    var sy = Number($("#sy").val())
+    var ey = Number($("#ey").val())
+    var hr = Number($("#hr").val())
+    var mn = Number($("#mn").val())
+    var yr = Number($("#yr").val())
+    var mo = Number($("#mo").val())
+    var dy = Number($("#dy").val())
+    if (yr < -14000 || yr > 14000) { alert ('Year range allowed -14000 to 14000. Please correct year'); return false } 
+    else if (mo < 1 || mo > 12) { alert ('Please correct month'); return false }
+    else if (dy < 1 || dy > 31) { alert ('Please correct day'); return false }
+    else if (sy >= ey) { console.log('Please correct year range'); alert ('Please correct year range'); return false; }
+    return true;
+
+    event.preventDefault();
+
+});
+</script>
 {% endblock %}
+
+

@@ -1,0 +1,56 @@
+<!-- templates/signup.html -->
+
+{% extends "base2.html" %}
+
+{% block content %}
+<div class="w3-padding w3-white w3-display-container">
+    <h3 class="title"><img src="/static/images/avd.png" width="75px" />&nbsp;Ayurveda Treatment</h3>
+    <p class="w3-center">
+       While we try to help you narrow down the symptoms precisely, we still encourage you to 
+        read the materia medica before selecting a Homeopathic medicine and dose. 
+        Most treatments begin with trial and error. In Ayurveda or Traditional Chinese Medicine, 
+        such prognosis comes as no surprise.
+    </p>
+    
+    <form method="POST" name="atf1" action="/ayurtreat1/" class="w3-container w3-card w3-padding">
+    <div class="w3-section">
+        <h2 class="w3-center"></h2>
+        <label>Humor</label>
+        <select class="w3-select" name="humor" id="humor" required>
+            <option value="" disabled selected>Select Humor</option>
+            <option value="vata">Vata</option>
+            <option value="pitta">Pitta</option>
+            <option value="kapha">Kapha</option>
+        </select>
+    </div>
+    <div class="w3-section">
+        <h2 class="w3-center"></h2>
+        <label>Area</label>
+        <select class="w3-select" name="area" id="area" required>
+            <option value="" disabled selected>Select Area</option>
+            <option value="agni">Agni - Digestion</option>
+            <option value="allergy">Allergy</option>
+            <option value="cold">Cough and Cold</option>
+            <option value="debi">Debility, immunity, low vitality</option>
+            <option value="depress">Depression, sinus</option>
+            <option value="sugar">Diabetes, mucus</option>
+            <option value="elim">Elimination</option>
+            <option value="fem">Female reproductive</option>
+            <option value="liver">Liver, menstruation, wounds</option>
+            <option value="heart">Heart</option>
+            <option value="stress">Stress, anxiety, insomnia</option>
+            <option value="urine">Urinary infections</option>
+        </select>
+    </div>
+
+    <button name="asbtn" class="w3-button w3-center w3-orange w3-hover-purple">Search</button>
+</form>
+
+<hr />
+<br />
+
+
+            
+</div>
+
+{% endblock %}

@@ -6,16 +6,33 @@
 <div cass="w3-container w3-row">
 <h1 class="w3-center">Mind Influences</h1>
 <h2 class="w3-center">Concerning times, transiting Graha over Natal Moon Influences the mind</h2>
-<p class="w3-center">Natal Moon Sign: {{mpost.sign}}, Nakshatra: {{mpost.nak}}, Navamsa: {{mpost.nav}}, Ashtakvarga points on the sign: {{mpost.astak}}</p>
+<p class="w3-center">Natal Moon Sign: {{mpost.sign}}, Nakshatra: {{mpost.nak}}, Navamsa: {{mpost.nav}}, Ashtakvarga points on moon's natal sign: {{mpost.astak}}</p>
 </div>
 
 <br />
+<div class="w3-container w3-card-2 w3-row">
+<form method="POST" id="mi2form" action="/spirit/" class="w3-container">
+    <input type="hidden" name="yr" value="{{ mdt['yr'] }}" />
+    <input type="hidden" name="mo" value="{{ mdt['mo'] }}" />
+    <input type="hidden" name="dy" value="{{ mdt['dy'] }}" />
+    <input type="hidden" name="hr" id="hr" value="{{ mdt['hr'] }}" />
+    <input type="hidden" name="mn" id="mn" value="{{ mdt['mn'] }}" />
+    <input type="hidden" name="ln" value="{{ mdt['ln'] }}" />
+    <input type="hidden" name="lt" value="{{ mdt['lt'] }}" />
+    <input type="hidden" name="tz" value="{{ mdt['tz'] }}" />
+    <input type="hidden" name="sy" id="sy" value="{{ mdt['sy'] }}" />
+    <input type="hidden" name="ey" id="ey" value="{{ mdt['ey'] }}" />
+    <button type="submit" class="w3-button w3-right w3-blue w3-hover-purple" id="sbtn">Continue ...</button>
+</form>
+</div>
 
 <div class="w3-container w3-card-2 w3-row">
     <div class="w3-responsive">
         <table class="w3-table-all">
             <tr class="w3-black">
                 <th>Passing Graha</th>
+                <th>Long. Spd</th>
+                <th>Ret</th>
                 <th>Nakshatra</th>
                 <th>Sign</th>
                 <th>House</th>
@@ -26,11 +43,14 @@
             </tr>
             {% for post in posts %}
             <tr><td>{{ post.Collision }}</td>
+                <td>{{ post.Spd }}</td>
+                <td>{{ post.Ret }}</td>
                 <td>{{ post.Naks1 }}</td>
                 <td>{{ post.Sign1 }}</td>
                 <td>{{ post.House }}</td>
                 <td>{{ post.Nav1 }}</td>
-                <td>{{ post.ash }}</td>
+                {% if post['ash'] == -1 %}<td></td>{% endif %}
+                {% if post['ash'] != -1 %}<td>{{ post['ash'] }}</td>{% endif %}
                 <td>{{ post.Year }} - 
                 {{ post.Month }}</td>
                 <td>{{ post.result }}</td>
@@ -38,16 +58,20 @@
             {% endfor %}
         </table>
       </div>
-      <p>Nakshatra denotes the time a Graha in transit crossed your Natal Moon coordinates. 
-          Any column on the Moon, you realize, relates to the Moon's pressure on the mind 
-          computed from its Natal longitudinal degrees. It is the mind factor. 
-          The person born at a certain time also accounts for other grahas which shadow 
-          the Moon's longitudinal coordinates frozen as a benchmark on human charts. 
-          Grahas that cross bring turmoil, sometimes its opposite - mental peace. 
+      <p>(R) shows the Crossing Graha is in retrogression. Means it is receding back. 
+          (RZ) indicates it is close to stopping in its zodiacal path. Motion of the
+          grahas is how we see them relatively from earth. They never stop their
+          orbital motion, but from earth they seem to be retracing their path. Rahu and Ketu always
+          have a R-motion. Jupiter and Saturn often bestow good results in their R-motion.
+      </p>
+      <p>Nakshatra denotes the time a Graha in transit crosses your Natal Moon coordinates. 
+          Any column from the above table that bears 'the Moon', 
+          relates to the Moon's pressure on the mind. Moon is the mind factor. 
+          Grahas that cross the natal moon bring turmoil, sometimes its opposite - mental peace. 
           The body and soul thereof find solitude. Dark-sided grahas such as Saturn, 
           Rahu and Ketu overwhelm the thoughts into darker premises, whereas Sun, Mars 
           ignite the souls fiery nature. They often incite other health problems; 
-          while Mercury sets a dialog mood, Venus brings our fine skills (art, love) 
+          while Mercury sets a mood for dialogs, Venus brings our fine skills (art, love) 
           to light, Jupiter sets a pattern to relax, but often turn obese.
       </p>
 </div>

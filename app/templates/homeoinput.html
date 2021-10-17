@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="w3-padding w3-white w3-display-container">
-    <h3 class="title">Homeopathy</h3>
+    <h3 class="title"><img src="/static/images/home2.png" width="75px" />&nbsp;Homeopathy</h3>
     <p class="w3-center">
         While homeopathy can scarcely compare in antiquity with Chinese or Indian medicine, 
         it is the longest established CAM (complementary alternate medicine) from 
@@ -25,9 +25,10 @@
         Most treatments begin with trial and error. In homeopathy or Chinese or Indian medicine, 
         such prognosis comes as no surprise.
     </p>
-    <p>Read more about it in <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1676328/">National Institute of Health (NIH) website</a></a> </p>
-    <form method="POST" name="f1" action="/body/" class="w3-container">
+    <p>Read more about it: <a class="w3-btn w3-blue" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1676328/">National Institute of Health (NIH) website</a></a> </p>
+    <form method="POST" name="f1" action="/body/" class="w3-container w3-card w3-padding">
         <div class="w3-section">
+            <h2 class="w3-center">List alphabetically</h2>
             <label>Materia Medica</label>
             <select class="w3-select" name="tchar" id="tchar" required>
                 <option value="" disabled selected>Medica Name Starting with</option>
@@ -60,15 +61,18 @@
             </select>
         </div>
 
-        <button class="w3-button w3-center w3-blue w3-hover-purple">Start</button>
+        <button class="w3-button w3-center w3-blue w3-hover-purple">Load</button>
     </form>
 
-
-    <form method="POST" name="f2" action="/body2/" class="w3-container">
+    <hr />
+    <br />
+    
+    <form method="POST" name="f2" action="/body2/" class="w3-container w3-card w3-padding">
     <div class="w3-section">
-        <label>Symptoms</label>
+        <h2 class="w3-center">Single Symptom Search</h2>
+        <label>Symptom</label>
         <select class="w3-select" name="tchar2" id="tchar2" required>
-            <option value="" disabled selected>Symptoms</option>
+            <option value="" disabled selected>Symptom</option>
             <option value="burn">Burn</option>
             <option value="calm">Calm</option>
             <option value="chest">Chest</option>
@@ -78,12 +82,17 @@
             <option value="diabetes">Diabetes</option>
             <option value="diarrhoea">Diarrhoea</option>
             <option value="dream">Dream(s)</option>
+            <option value="feet">Feet</option>
+            <option value="finger">Finger</option>
+            <option value="foot">Foot</option>
             <option value="gout">Gout</option>            
             <option value="headache">Headache</option>
             <option value="heart">Heart</option>
+            <option value="hip">Hip</option>
             <option value="indigestion">Indigestion</option>
             <option value="insomnia">Insomnia</option>
             <option value="itching">Itching</option>
+            <option value="lip">Lip</option>
             <option value="lump">Lump</option>
             <option value="malaria">Malaria</option>
             <option value="mental">Mental</option>
@@ -95,13 +104,61 @@
             <option value="sleep">Sleep</option>
             <option value="stomach">Stomach</option>
             <option value="stroke">Stroke</option>
+            <option value="teeth">Teeth</option>
+            <option value="toe">Toe</option>
+            <option value="tooth">Tooth</option>
             <option value="tuberculosis">Tuberculosis</option>            
             <option value="vertigo">Vertigo</option>            
         </select>
     </div>
 
-    <button name="f2btn" class="w3-button w3-center w3-blue w3-hover-purple">Start</button>
+    <button name="f2btn" class="w3-button w3-center w3-orange w3-hover-purple">Search</button>
 </form>
+
+<hr />
+<br />
+
+<form method="POST" name="f3" action="/body3/" class="w3-container w3-card w3-padding">
+    <div class="w3-section">
+        <h2 class="w3-center">Two symptom search</h2>
+        <label>Symptom 1 (primary)</label>
+        <input type="text" name="symp1" id="symp1" class="w3-input" value="" placeholder="Symptom-1 (No spaces)" required/>
+        <label>&nbsp;</label>
+        <select class="w3-select" name="cond1" id="cond1">
+            <option value="NONE" selected>None</option>
+            <option value="AND">And</option>
+            <option value="OR">Or</option>
+        <label>Symptom 2</label>
+        <input type="text" name="symp2" id="symp2" class="w3-input" value="" placeholder="Symptom-2 (No spaces)" />
+    </div>
+    
+    <button name="f3btn" class="w3-button w3-center w3-green w3-hover-purple">Search</button>
+    </form>
+    <hr />
+    <br />
+    
+    <form method="POST" name="f4" action="/body4/" class="w3-container w3-card w3-padding">
+        <div class="w3-section">
+            <h2 class="w3-center">Three symptom search</h2>
+            <label>Symptom 1 (primary)</label>
+            <input type="text" name="symp1" id="symp1" class="w3-input" value="" placeholder="Symptom-1 (No spaces)" required/>
+            <label>&nbsp;</label>
+            <select class="w3-select" name="cond1" id="cond1">
+                <option value="NONE" selected>None</option>
+                <option value="AND">And</option>
+                <option value="OR">Or</option>
+            <label>Symptom 2</label>
+            <input type="text" name="symp2" id="symp2" class="w3-input" value="" placeholder="Symptom-2 (No spaces)" />
+            <select class="w3-select" name="cond2" id="cond2">
+                <option value="NONE" selected>None</option>
+                <option value="AND">And</option>
+                <option value="OR">Or</option>
+            <label>Symptom 3</label>
+            <input type="text" name="symp3" id="symp3" class="w3-input" value="" placeholder="Symptom-3 (No spaces)" />
+        </div>
+        <button name="f4btn" class="w3-button w3-center w3-red w3-hover-purple">Search</button>
+    </form>
+            
 </div>
 
 {% endblock %}

@@ -1,8 +1,9 @@
 from os import listdir
 from os.path import isfile, join
 import json
-# import os
+import re
 
+# def
 def reduce(function, iterable, initializer=None):
     it = iter(iterable)
     if initializer is None:
@@ -14,9 +15,12 @@ def reduce(function, iterable, initializer=None):
     for x in it:
         accum_value = function(accum_value, x)
     return accum_value
+# end def
 
+# def
 def deep_get(dictionary, keys, default=None):
     return reduce(lambda d, key: d.get(key, default) if isinstance(d, dict) else default, keys.split("."), dictionary)
+# end def
 
 '''
 Starts Here
@@ -30,7 +34,7 @@ def dprint(txt):
 
 # def
 def homerun(tchar):
-    mypath = './static/'
+    mypath = './static/homeo/'
     onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
     onlyfiles.sort()
     cumdata = []
@@ -46,7 +50,7 @@ def homerun(tchar):
 
 # def
 def homesrch(phr):
-    mypath = './static/'
+    mypath = './static/homeo/'
     onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
     onlyfiles.sort()
     cumdata = []
@@ -56,21 +60,67 @@ def homesrch(phr):
             with open(filename) as home_file:
                 tdata = json.load(home_file)
                 if checkPhrase(phr, tdata):
-                    rdata = replacePhrase(phr, tdata)
+                    rdata = replacePhrase(phr, tdata, 'yellow')
                     cumdata.append(rdata.copy())
     return cumdata    
 # end def
 
+# def
+def homeMultiSrch(phr, cond1, phx):
+    mypath = './static/homeo/'
+    onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
+    onlyfiles.sort()
+    cumdata = []
+    for file in onlyfiles:
+        if file.endswith(".json"):
+            filename = join(mypath, file)
+            with open(filename) as home_file:
+                tdata = json.load(home_file)
+                if checkPhrase(phr, tdata) and (cond1 != 'AND'):
+                    rdata = replacePhrase(phr, tdata, 'yellow')
+                    cumdata.append(rdata.copy())
+                if checkPhrase(phx, tdata) and checkPhrase(phr, tdata) and (cond1 == 'AND'):
+                        rdata = replacePhrase(phx, tdata, 'yellow')
+                        rdata = replacePhrase(phr, rdata, 'green')
+                        cumdata.append(rdata.copy())
+                if checkPhrase(phx, tdata) and (cond1 == 'OR'):
+                        rdata = replacePhrase(phx, tdata, 'green')
+                        cumdata.append(rdata.copy())
+    return cumdata    
+# end def
+
+satt = [
+    'Mind', 'Head', 'Eyes','Face', 'Nose','Ears','Burn','Eye',
+    'Mouth','Respiratory','Throat','Stomach','Chest', 'Abdomen',
+    'Gastric','Heart','Male','Female','Extremities','Back','Hip',
+    'Fever','Sleep','Skin','Rectum','Urine','Stool','Modalities',
+    'Toe','Finger','Jaws','Lips','Feet','Foot','Tooth','Teeth',
+    'Bowels',
+    'Relationships'
+]
+
 # import re
-def replacePhrase(phrase, djson):
+def replacePhrase(phrase, djson, color):
     rson = djson
-    r = str(rson['details'])
-    # ns = ' *** ' + phrase + ' *** '
-    ns = '<span class="w3-yellow">' + phrase + '</span>'
-    # re.sub(phrase, ns, r, flags=re.I)
-    nr = r.replace(phrase, ns)
-    # print ('replaced', nr)
-    rson["details"] = nr
+    ns = '<span class="w3-' + color + '">' + phrase + '</span>'
+    try:
+        # print ('rson', rson['details'])
+        rstr = str(rson['details'])
+        nr = re.sub(phrase, ns, rstr, flags=re.IGNORECASE)
+        # print ('replaced', nr)
+        rson["details"] = nr
+    except:
+        # do nothing
+        print("An exception occurred")
+
+    r = deep_get(djson, 'symptoms')
+    if r is not None:
+        for i in range(len(satt)):
+            if satt[i] in djson['symptoms']:
+                rstr = str(djson['symptoms'].get(satt[i]))
+                if re.search(phrase, rstr, re.IGNORECASE):
+                    nr = re.sub(phrase, ns, rstr, flags=re.IGNORECASE)
+                    rson['symptoms'][satt[i]] = nr
     return rson
 
 # def
@@ -79,73 +129,45 @@ def checkPhrase(phrase, djson):
     r = deep_get(djson, 'details')
     if r is not None:
         # print(r)
-        if phrase in r: 
+        if re.search(phrase, r, re.IGNORECASE):
             result = True
-        '''
-        or phrase in deep_get(d, 'symptoms.Mind') \
-        or phrase in deep_get(d, 'symptoms.Head') \
-        or phrase in deep_get(d, 'symptoms.Eyes') \
-        or phrase in deep_get(d, 'symptoms.Nose') \
-        or phrase in deep_get(d, 'symptoms.Ears') \
-        or phrase in deep_get(d, 'symptoms.Mouth') \
-        or phrase in deep_get(d, 'symptoms.Respiratory') \
-        or phrase in deep_get(d, 'symptoms.Throat') \
-        or phrase in deep_get(d, 'symptoms.Stomach') \
-        or phrase in deep_get(d, 'symptoms.Abdomen') \
-        or phrase in deep_get(d, 'symptoms.Heart') \
-        or phrase in deep_get(d, 'symptoms.Male') \
-        or phrase in deep_get(d, 'symptoms.Female') \
-        or phrase in deep_get(d, 'symptoms.Extremities') \
-        or phrase in deep_get(d, 'symptoms.Back') \
-        or phrase in deep_get(d, 'symptoms.Fever') \
-        or phrase in deep_get(d, 'symptoms.Sleep') \
-        or phrase in deep_get(d, 'symptoms.Skin') \
-        or phrase in deep_get(d, 'symptoms.Urine') \
-        or phrase in deep_get(d, 'symptoms.Stool') \
-        or phrase in deep_get(d, 'symptoms.Modalities'):
-        '''
-
-        #    result = True
-
+    if not result:
+        r = deep_get(djson, 'symptoms')
+        if r is not None:
+            for i in range(len(satt)):
+                if satt[i] in djson['symptoms']:
+                    if re.search(phrase, str(djson['symptoms'].get(satt[i])), re.IGNORECASE):
+                        result = True
     return result
 # end def
 
-# print (homesrch('heart'))
+# def
+def homeThreeSrch(phr, cond1, phx, cond2, phy):
+    mypath = './static/homeo/'
+    onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
+    onlyfiles.sort()
+    cumdata = []
+    for file in onlyfiles:
+        if file.endswith(".json"):
+            filename = join(mypath, file)
+            with open(filename) as home_file:
+                tdata = json.load(home_file)
+                if checkPhrase(phr, tdata) and (cond1 != 'AND'):
+                    rdata = replacePhrase(phr, tdata, 'yellow')
+                    cumdata.append(rdata.copy())
+                if checkPhrase(phx, tdata) and checkPhrase(phr, tdata) and (cond1 == 'AND') and (cond2 != 'AND'):
+                        rdata = replacePhrase(phx, tdata, 'yellow')
+                        rdata = replacePhrase(phr, rdata, 'green')
+                        cumdata.append(rdata.copy())
+                if checkPhrase(phx, tdata) and checkPhrase(phr, tdata) and checkPhrase(phy, tdata) \
+                    and (cond1 == 'AND') and (cond2 == 'AND'):
+                        rdata = replacePhrase(phx, tdata, 'yellow')
+                        rdata = replacePhrase(phr, rdata, 'green')
+                        rdata = replacePhrase(phy, rdata, 'blue')
+                        cumdata.append(rdata.copy())
+                if checkPhrase(phx, tdata) and (cond1 == 'OR'):
+                        rdata = replacePhrase(phx, tdata, 'green')
+                        cumdata.append(rdata.copy())
+    return cumdata    
+# end def
 
-print (homesrch('lump'))
-
-'''
-for c in cumdata:
-    # print (deep_get(person, "person.name.first"))
-    print (c['name']) 
-    dprint (deep_get(c, 'common_names'))
-
-        deep_get(c, 'details'),
-        deep_get(c, 'dosage'), 
-        deep_get(c, 'symptoms.Mind'),
-        deep_get(c, 'symptoms.Head'),
-        deep_get(c, 'symptoms.Eyes'),
-        deep_get(c, 'symptoms.Nose'),
-        deep_get(c, 'symptoms.Ears'),
-
-        deep_get(c, 'symptoms.Mouth'),
-        deep_get(c, 'symptoms.Respiratory'),
-        deep_get(c, 'symptoms.Throat'),
-
-        deep_get(c, 'symptoms.Stomach'),
-        deep_get(c, 'symptoms.Abdomen'),
-
-        deep_get(c, 'symptoms.Heart'),
-        deep_get(c, 'symptoms.Male'),
-        deep_get(c, 'symptoms.Female'),
-        deep_get(c, 'symptoms.Extremities'),
-        deep_get(c, 'symptoms.Back'),
-        deep_get(c, 'symptoms.Fever'),
-        deep_get(c, 'symptoms.Sleep'),
-        deep_get(c, 'symptoms.Skin'),
-
-        deep_get(c, 'symptoms.Urine'),
-        deep_get(c, 'symptoms.Stool'),
-
-        deep_get(c, 'symptoms.Modalities')
-    '''

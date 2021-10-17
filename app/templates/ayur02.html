@@ -1,0 +1,150 @@
+<!-- templates/class.html -->
+
+{% extends "base2.html" %}
+
+{% block content %}
+{% include "aycomm.html" %}
+
+<br />
+
+<div class="w3-container w3-row">
+    <h1>Determining your Doshas Part 1</h1>
+    <p>Here’s a questionnaire for getting a better understanding of dosha(s) in your constitution, what you experience will pinpoint the doshas and what has become of them. Take your time and go through the questions, if you feel you are being biased in your replies, consult your spouse, partner or friend. </p>
+    <div class="w3-container w3-card-4">
+    <h3>Physical</h3>
+    <form role="form" id="question-form" name="question-form" method="POST" action="/const01/" class="w3-container w3-card w3-padding">
+    <div class="form-group">
+      <label for="selbuild">1 How is your build? </label>
+      <select class="w3-input" id="selbuild" name="selbuild">
+        <option value="k">Large, broad, evenly proportioned</option>
+        <option value="v">Thin, either short or very tall</option>
+        <option value="p">Medium, proportionate, toned</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="selweight">2 How about the body weight? </label>
+      <select class="w3-input" id="selweight" name="selweight" >
+        <option value="k">Overweight, large</option>
+        <option value="v">Light</option>
+        <option value="p">Medium</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="selweightmngt">3 Body weight Management </label>
+      <select class="w3-input" id="selweightmngt" name="selweightmngt">
+        <option value="p">Gain but lose quickly</option>
+        <option value="v">Not easy to gain weight</option>
+        <option value="k">Gain weight easily - hard to lose</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="selskin">4 What's your skin like? </label>
+      <select class="w3-input" id="selskin" name="selskin">
+        <option value="v">Thin, dry, cold, dark, sallow; tans easily</option>
+        <option value="k">Cool, fair and greasy; quick to tan</option>
+        <option value="p">Warm, light, reddish, sunburns rapidly</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="selhair">5 Hair? </label>
+      <select class="w3-input" id="selhair" name="selhair">
+        <option value="p">Straight, fine, reddish, premature balding or graying</option>
+        <option value="v">Dry, frizzy, thin, dark</option>
+        <option value="k">Oily, wavy, thick, blonde, black or brown</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="selteeth">6 Teeth? </label>
+      <select class="w3-input" id="selteeth" name="selteeth">
+        <option value="p">Medium, soft, tender gums</option>
+        <option value="v">Protruding, big, roomy, thin gums</option>
+        <option value="k">Healthy, white, strong gums</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="seleyes">7 Eyes </label>
+      <select class="w3-input" id="seleyes" name="seleyes">
+        <option value="p">Green, hazel, light brown, almond-shaped</option>
+        <option value="v">Brown, gray, violet, unusual color; small</option>
+        <option value="k">Black, blue, dark-brown, big, sensual</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="sellips">8 Lips </label>
+      <select class="w3-input" id="sellips" name="sellips">
+        <option value="p">Red, inflamed, yellowish</option>
+        <option value="v">Dry, cracked, black or brown tinged</option>
+        <option value="k">Smooth, greasy, pale, white</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="selchin">9 Chin </label>
+      <select class="w3-input" id="selchin" name="selchin">
+        <option value="k">Rounded, double</option>
+        <option value="v">Thin, angular</option>
+        <option value="p">Tapering</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="selcheeks">10 Cheeks </label>
+      <select class="w3-input" id="selcheeks" name="selcheeks">
+        <option value="v">Wrinkled, sunken</option>
+        <option value="k">Rounded, plump</option>
+        <option value="p">Smooth, flat</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="selneck">11 Neck </label>
+      <select class="w3-input" id="selneck" name="selneck">
+        <option value="p">Medium</option>
+        <option value="k">Big, folded</option>
+        <option value="v">Thin, long</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="selnails">12 Nails </label>
+      <select class="w3-input" id="selnails" name="selnails">
+        <option value="v">Dry, gray, ridged</option>
+        <option value="k">Square, white, even</option>
+        <option value="p">Clear, well formed, pliable</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="selchest">13 Chest </label>
+      <select class="w3-input" id="selchest" name="selchest">
+        <option value="p">Moderate build</option>
+        <option value="v">Flat, sunken</option>
+        <option value="k">Heavy, round</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="selbelly">14 Belly </label>
+      <select class="w3-input" id="selbelly" name="selbelly">
+        <option value="p">Moderate</option>
+        <option value="k">Big, pot bellied</option>
+        <option value="v">Thin, flat, sunken</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="selnavel">15 Belly button</label>
+      <select class="w3-input" id="selnavel" name="selnavel">
+        <option value="p">Oval, superficial</option>
+        <option value="k">Big, deep, round, stretched</option>
+        <option value="v">Small, irregular, herniated</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="selhips">16 Hips</label>
+      <select class="w3-input" id="selhips" name="selhips">
+        <option value="p">Moderate</option>
+        <option value="v">Slender, thin</option>
+        <option value="k">Heavy, big</option>
+      </select>
+    </div>
+    <p><button type="submit" class="w3-btn w3-black w3-hover-purple" id="questdosha">What am I?</button></p>
+    </div>
+    <hr />
+    </form>
+</div>
+
+{% endblock %}

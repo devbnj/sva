@@ -17,10 +17,10 @@
   }
   /* Full height image header */
   .bgimg-1 {
-    background-position: left;
+    background-position: center;
     background-size: auto;
     background-image: url("/static/images/IMG_1993.JPG");
-    min-height: 80%;
+    min-height: 50%;
   }
 
   .w3-bar .w3-button {
@@ -36,18 +36,12 @@
     <a href="{{ url_for('main.resort') }}" class="w3-bar-item w3-button w3-wide">SpiritBM</a>
     <!-- Right-sided navbar links -->
     <div class="w3-right w3-hide-small">
-      {% if not current_user.is_authenticated %}
-      <a href="{{ url_for('auth.login') }}" class="w3-bar-item w3-button"><i class="fa fa-sign-in"></i> Login</a>
-      <a href="{{ url_for('auth.signup') }}" class="w3-bar-item w3-button"><i class="fa fa-user-plus"></i> Register</a>
-      {% endif %}
-      {% if current_user.is_authenticated %}
-      <a href="{{ url_for('auth.logout') }}" class="w3-bar-item w3-button"><i class="fa fa-sign-out"></i> Logout</a>
-      <a href="{{ url_for('main.profile') }}" class="w3-bar-item w3-button"><i class="fa fa-user"></i> Profile</a>
+      <a href="{{ url_for('main.index') }}" class="w3-bar-item w3-button"><i class="fa fa-home"></i> Home</a>
       <a href="{{ url_for('main.resort') }}" class="w3-bar-item w3-button"><i class="fa fa-sun-o"></i> Resorts</a>
       <a href="{{ url_for('main.travel') }}" class="w3-bar-item w3-button"><i class="fa fa-plane"></i> Travel</a>
       <a href="{{ url_for('main.mind') }}" class="w3-bar-item w3-button"><i class="fa fa-moon-o"></i> Mind</a>
+      <a href="{{ url_for('main.ayur') }}" class="w3-bar-item w3-button"><i class="fa fa-leaf"></i> Ayurveda</a>
       <a href="{{ url_for('main.body') }}" class="w3-bar-item w3-button"><i class="fa fa-user-o"></i> Homeopathy</a>
-      {% endif %}
     </div>
     <!-- Hide right-floated links on small screens and replace them with a menu icon -->
 
@@ -60,23 +54,17 @@
 <!-- Sidebar on small screens when clicking the menu icon -->
 <nav class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left w3-hide-medium w3-hide-large" style="display:none" id="mySidebar">
   <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">Close ×</a>
-  {% if not current_user.is_authenticated %}
-  <a href="{{ url_for('auth.login') }}" onclick="w3_close()" class="w3-bar-item w3-button">Login</a>
-  <a href="{{ url_for('auth.signup') }}" onclick="w3_close()" class="w3-bar-item w3-button">Register</a>
-  {% endif %}
-  {% if current_user.is_authenticated %}
-  <a href="{{ url_for('auth.logout') }}" onclick="w3_close()" class="w3-bar-item w3-button">Logout</a>
-  <a href="{{ url_for('main.profile') }}" onclick="w3_close()" class="w3-bar-item w3-button">Profile</a>
+  <a href="{{ url_for('main.index') }}" onclick="w3_close()" class="w3-bar-item w3-button">Home</a>
   <a href="{{ url_for('main.resort') }}"  onclick="w3_close()" class="w3-bar-item w3-button"></i>Resorts</a>
   <a href="{{ url_for('main.travel') }}"  onclick="w3_close()" class="w3-bar-item w3-button"></i>Travel</a>
   <a href="{{ url_for('main.mind') }}"  onclick="w3_close()" class="w3-bar-item w3-button"></i>Mind</a>
+  <a href="{{ url_for('main.ayur') }}"  onclick="w3_close()" class="w3-bar-item w3-button"></i>Ayurveda</a>
   <a href="{{ url_for('main.body') }}"  onclick="w3_close()" class="w3-bar-item w3-button"></i>Homeopathy</a>
-{% endif %}
 </nav>
 
 <!-- Header with full-height image -->
 <header class="bgimg-1 w3-display-container w3-grayscale-min" id="home">
-  <div class="w3-display-left w3-text-white" style="padding:120px">
+  <div class="w3-display-left w3-text-white" style="padding:100px">
     <span class="w3-jumbo w3-hide-small">Rejuvenate : Relive</span><br>
     <span class="w3-xxlarge w3-hide-large w3-hide-medium">Rejuvenate : Relive</span><br>
     <span class="w3-large">Spirit:Body:Mind</span>
@@ -96,6 +84,8 @@
     <span class="w3-text w3-theme-light w3-padding">Go Top</span>    
     <a class="w3-text-blue w3-hover-purple" href="#home"><span class="w3-xlarge">
     <i class="fa fa-chevron-circle-up"></i></span></a>
+    <h3 class="w3-center">Disclaimer</h3>
+    <p class="w3-center">SpiritBM does not guarantee the accuracy or reliability of any of the information, content or advertisements contained in, resulting from, or linked to this website. SpiritBM reserves the right, at its sole discretion and without any obligation, to make improvements to, or correct any error or omissions in any portion of the service or the materials. By utilizing and accessing SpiritBM and/or by requesting and/or receiving astrological interpretations and/or advice either through the site or affiliates of the company, you agree to release Jotiz from any and all liability with regard to the contents of the site and/or advice received. All services, materials and products at SpiritBM are provided for entertainment purposes only. No warranties are made as to the correctness of the service, materials or products. SpiritBM and any affiliated site expressly disclaim any and all warranties, expressed or implied. In no event shall SpiritBM be liable for any direct, indirect, incidental, punitive or consequential damages of any kind whatsoever with respect to its service, materials and products. If for political, cultural or social reasons SpiritBM techniques are not accepted in your locality or community, by accessing SpiritBM or affiliate site and/or by receiving astrological information and the associated services or products from SpiritBM, you agree that you do so of your own free will and that you will not hold SpiritBM or its affiliates responsible in any way.</p>
   </div>
 </footer>
 

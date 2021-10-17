@@ -1,0 +1,52 @@
+<!-- templates/class.html -->
+
+{% extends "base2.html" %}
+
+{% block content %}
+{% include "aycomm.html" %}
+
+<br />
+
+<div class="w3-container w3-row">
+    {% if nt %}
+    <ul class="w3-ul w3-card-4 w3-white w3-center">
+        <span onclick="this.parentElement.style.display='none'"
+            class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>
+        <img src="/static/images/note.jpeg" class="w3-bar-item" style="width:75px" />
+        <li class="w3-large">{{ nt }}</li>
+    </ul>
+    {% endif %}
+    <br />
+    <ul class="w3-ul w3-card-4">
+        <span onclick="this.parentElement.style.display='none'"
+            class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>
+        <img src="/static/images/avd.png" class="w3-bar-item" style="width:75px" />
+        <li class="w3-large">{{ bdy }}</li>
+    </ul>
+    <br />
+    <ul class="w3-ul w3-card-4">
+        <span onclick="this.parentElement.style.display='none'"
+            class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>
+        <!-- img src="/static/images/avd.png" class="w3-bar-item" style="width:75px" / -->
+        <li class="w3-large">{{ pg1 }}</li>
+    </ul>
+    <br />
+    {% if pg2 %}
+    <ul class="w3-ul w3-card-4">
+        <span onclick="this.parentElement.style.display='none'"
+            class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>
+        <li class="w3-large">{{ pg2 }}</li>
+    </ul>
+    <br />
+    {% endif %}
+    {% if cv %}
+    <ul class="w3-ul w3-card-4 w3-deep-orange w3-center">
+        <span onclick="this.parentElement.style.display='none'"
+            class="w3-bar-item w3-button w3-deep-orange w3-text-white w3-xlarge w3-right">×</span>
+        <img src="/static/images/disclaim.png" class="w3-bar-item" style="width:75px" />
+        <li class="w3-large">{{ cv }}</li>
+    </ul>
+    {% endif %}    
+</div>
+
+{% endblock %}

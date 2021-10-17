@@ -1,0 +1,21 @@
+<!-- templates/profile.html -->
+
+{% extends "base2.html" %}
+
+{% block content %}
+<div cass="w3-container w3-row">
+<h1 class="w3-center">Vivekananda</h1>
+<p class="w3-center"><a href="{{ url_for('main.advprev') }}" class="w3-button w3-blue"><i class="fa fa-arrow-left"></i> Prev</a>
+<a href="{{ url_for('main.advnext') }}" class="w3-button w3-green"><i class="fa fa-arrow-right"></i> Next</a></p>    
+<p class="w3-left">{{ name }}</p>
+</div>
+
+<br />
+
+<div class="w3-container w3-card-2 w3-row">
+{% for post in post1 %}
+<p class="w3-large">{{ post.sayings }}</p>
+{% endfor %}
+</div>
+
+{% endblock %}

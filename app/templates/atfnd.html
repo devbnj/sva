@@ -1,0 +1,27 @@
+<!-- templates/class.html -->
+
+{% extends "base2.html" %}
+
+{% block content %}
+<div cass="w3-container w3-row">
+<h1 class="w3-center">Ayurveda Treatment</h1>
+</div>
+
+<div class="w3-container w3-center w3-card-4">
+    {% if hd %}<h1 class="w3-pale-red">{{ hd }}</h1>{% endif %}
+    {% if bd %}<h2 class="w3-pale-blue">{{ bd }}</h2>{% endif %}
+    <h3><img src="/static/images/symp.png" style="width:70px" /> Symptoms</h3>
+    {% if sy1 %}<p class="w3-large">{{ sy1 }}</p>{% endif %}
+    {% if sy2 %}<p class="w3-large">{{ sy2 }}</p>{% endif %}
+    {% if sy3 %}<p class="w3-large">{{ sy3 }}</p>{% endif %}
+    <h3><img src="/static/images/treat2.png" style="width:70px" /> Treatment(s)</h3>
+    <p class="w3-large">Single treatment or many alternative treatments</p>
+    {% if tr1 %}<p class="w3-large">{{ tr1 }}</p>{% endif %}
+    {% if tr2 %}<p class="w3-large">{{ tr2 }}</p>{% endif %}
+    {% if tr3 %}<p class="w3-large">{{ tr3 }}</p>{% endif %}
+    {% if tr4 %}<p class="w3-large">{{ tr4 }}</p>{% endif %}
+    {% if tr5 %}<p class="w3-large">{{ tr5 }}</p>{% endif %}
+    {% if tr6 %}<p class="w3-large">{{ tr6 }}</p>{% endif %}
+</div>
+<br />
+{% endblock %}
